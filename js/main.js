@@ -20,12 +20,16 @@ var colorMap = function(party, data){
 		//with results available
 		if(data[i].estimates.length > 0){
 			//Fill state with candidate color
-			d3.select("#"+data[i].state).style("fill", function(){
-				var winner = data[i].estimates[0].choice;
-				return party === "gop" ? gopCandidates[winner] : demCandidates[winner];
-			});
+			d3.select("#"+data[i].state).style("fill", fillColor(party, data[i].estimates[0].choice));
 		}
 	}
+};
+
+/*
+	Color states according to the winners for the party
+*/
+var fillColor = function(party, winner){
+	return party === "gop" ? gopCandidates[winner] : demCandidates[winner];
 };
 
 /*
@@ -38,14 +42,14 @@ var assignColors = function(party, data){
 	//Iterate through party results
 	for(var i=0; i<data.length; i++){
 		//Check if estimates for available for the state
-		if(data[i].estimates !=null && data[i].estimates.length > 0){
+		if(data[i].estimates !==null && data[i].estimates.length > 0){
 			//Check if a person has won it (safety)
-			if (data[i].estimates[0].first_name != null){
+			if (data[i].estimates[0].first_name !== null){
 				winner = data[i].estimates[0].choice;
 				//Add to party candidates object
-				if(party === "gop" && gopCandidates[winner] == undefined){
+				if(party === "gop" && gopCandidates[winner] === undefined){
 					gopCandidates[winner] = colors[colorIndex++];					
-				}else if (party === "dem" && demCandidates[winner] == undefined){
+				}else if (party === "dem" && demCandidates[winner] === undefined){
 					demCandidates[winner] = colors[colorIndex++];
 				}else{
 					//do nothing
@@ -54,7 +58,7 @@ var assignColors = function(party, data){
 			}			
 		}
 	}
-}
+};
 
 /*
 	Update legend with state winners for the selected party
@@ -94,7 +98,7 @@ var updateHeader = function(party){
 		header.text("Democratic Party presidential primaries, 2016")
 		.style("color", "#0000ff");
 	}
-}
+};
 
 /*
 	Update summary section with data for the selected state 
@@ -121,15 +125,15 @@ var updateSummary = function(state){
 
  			//Could also be Undecided or Others, So check first name
 		 	var name;
-		  	if(d.first_name == null){
+		  	if(d.first_name === null){
 		 		name = d.choice;
 		  	}else{
 		  		name = d.first_name + " " + d.last_name;
 		  	}
 
 		  	//Add candidate name and percentage of votes won
-		  	return "<span class='name'>" + name + "</span>"
-			  	 + "<span class='percent'>" + d.value + "%</span>";
+		  	return "<span class='name'>" + name + "</span>" + 
+		  			 "<span class='percent'>" + d.value + "%</span>";
 		});
 
 	} else { // if estimates are not available, display election date
@@ -139,43 +143,32 @@ var updateSummary = function(state){
 	}
 };
 
+/* Returns topic for api request parameter */
+var getTopic = function(party){
+	return party === "gop" ?  "2016-president-gop-primary" : "2016-president-dem-primary";
+};
+
 /*
 	Get json data for the selected party
 	Can be further improved by caching the data
 */
-var getData = function(party){	
+var getData = function(party){
 	/*
 		Using JQuery's ajax api to get jsonp features.
 		d3.json does not support CORS as of today.
 	*/
 	$.ajax({
 	    url: huff_post_api_url,
-	 
-	    // The name of the callback parameter, as specified by the YQL service
 	    jsonpCallback: "pollsterCallback",
-
 	    cache: true,
-
 	    async: false,
-	 
-	    // Tell jQuery we're expecting JSONP
 	    dataType: "jsonp",
-
 	    contentType: "application/json",
-
 	    data: {
-	    	topic: function() {
-	    		if(party == "gop"){
-	    			return "2016-president-gop-primary"
-	    		}else{
-	    			return "2016-president-dem-primary"
-	    		}
-	    	}
-	    },
-	 
+	    	topic: getTopic(party)
+	    },	 
 	    // Work with the response
-	    success: function( response ) {
-	       
+	    success: function( response ) {	       
 	       	//Store data for retrieval during click events
 			data = response;
 			//Assign color for each state winner 
@@ -188,9 +181,7 @@ var getData = function(party){
 			updateHeader(party);
 			//Update the summary section on the side
 			updateSummary(response[0]);
-
 	    },
-
 	    //Log the error on console
 	    error: function (error) {
 	    	console.log( error ); 
