@@ -1,0 +1,111 @@
+/*Elements*/
+
+body{
+	margin: auto;
+    padding: 10px;
+    height: 100%;
+    max-width: 1200px;
+}
+
+aside {
+    float:left;
+    width: 20%;
+}
+
+section{
+	float:left;
+	width: 78%;
+}
+
+footer {
+  position: relative;
+  margin-top: -50px; /* negative value of footer height */
+  height: 50px;
+  clear:both;
+  border-top: 1px solid black;
+  text-align: center;
+}
+
+h3{
+	text-align: center;
+}
+
+/*Classes and Elements by Id*/
+
+.container {
+  overflow:auto;
+  padding-bottom: 50px;
+}
+
+.percent{
+	float:right;
+}
+
+.legendBox{
+	width: 20px;
+	height: 20px;
+}
+
+.legendText{
+	padding-left: 40px;
+}
+
+.info{
+	line-height: 10px;
+	text-align: center;
+}
+
+#partySelector{
+	text-align: center;
+}
+
+#summary, #legend{
+	border: 1px solid black;
+	margin: 5px;
+	padding: 5px;
+}
+
+
+
+/*svg map*/
+
+.state 
+{
+	fill:#E0E0E0;
+	stroke:#646464;
+	stroke-width:1;
+	stroke-opacity:1;
+}
+
+.territory
+{
+	opacity:0;
+	fill:#E0E0E0;
+	stroke:#646464;
+	stroke-width:1;
+	stroke-opacity:1;
+}
+
+.territoryborder
+{
+	opacity:0;
+	fill:none;
+	stroke:#A9A9A9;
+	stroke-width:2;
+}
+
+.border
+{
+	opacity:1;
+	fill:none;
+	stroke:#A9A9A9;
+	stroke-width:2;
+}
+
+.circle
+{
+   opacity:1;
+   fill:#E0E0E0;
+   stroke:#646464;
+   stroke-width:1;
+}
