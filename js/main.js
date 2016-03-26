@@ -200,7 +200,7 @@ d3.selectAll(".state").on("click", function() {
 		return;
 
 	//Remove highlight for previously selected state
-	d3.selectAll("#"+lastStateClicked).style("stroke-width", 1);
+	d3.select("#"+lastStateClicked).style("stroke-width", 1);
 	//Highlight the selected state
 	d3.select(this).style("stroke-width", 3);
 
@@ -233,6 +233,9 @@ d3.selectAll(".state").on("click", function() {
 	On change event for party dropdown
 */
 d3.select("#party").on("change", function(){
+	//Remove highlight for previously selected state (if any)
+	d3.select("#"+lastStateClicked).style("stroke-width", 1);
+
 	getData(this.value);
 });
 
