@@ -1,4 +1,5 @@
 # d3-election
-2016 US Party Primaries Election Result
 
-Built using D3 library
+US Party Primaries 2016 Election Results
+
+Interactive map displaying results of Democrat and Republican primaries in each state
