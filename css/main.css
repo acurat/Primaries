@@ -10,6 +10,8 @@ body{
 aside {
     float:left;
     width: 20%;
+    min-height: 593px;
+
 }
 
 section{
@@ -28,6 +30,7 @@ footer {
 
 h3{
 	text-align: center;
+	margin: 10px 5px;
 }
 
 h4{
@@ -64,11 +67,7 @@ p {
 	text-align: center;
 }
 
-#partySelector{
-	text-align: center;
-}
-
-#summary, #legend{
+.box {
 	border: 2px solid #A9A9A9;
 	border-radius: 15px;
 	margin: 5px;

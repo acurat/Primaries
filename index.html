@@ -10,14 +10,6 @@
 
 	<div id="container">
 
-		<div id="partySelector">
-			<span> Change Party: </span>
-				<select id="party">
-				  <option value="dem" selected>Democrats</option>
-				  <option value="gop">Republicans</option>
-				</select>
-		</div>
-
 		<h3 id="header"></h3> 
 		<p class="info"> (Click on map to see state results) </p>
 
@@ -142,8 +134,16 @@
 		</section>
 
 		<aside> 
-			<div id="summary"> </div>
-			<div id="legend">  </div>
+			<div id="summary" class="box"> </div>
+			<div id="legend" class="box">  </div>
+
+			<div class="box">
+				<span> Change Party: </span>
+				<select id="party">
+				  <option value="dem" selected>Democrats</option>
+				  <option value="gop">Republicans</option>
+				</select>
+			</div>
 		</aside>
 
 	</div>
