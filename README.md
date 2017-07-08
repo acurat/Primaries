@@ -1,4 +1,4 @@
-# d3-election
+# Primaries
 
 US Party Primaries 2016 Election Results
 
